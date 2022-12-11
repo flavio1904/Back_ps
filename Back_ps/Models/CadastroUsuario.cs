@@ -26,6 +26,6 @@ namespace Back_ps.Models
 
         [Required(ErrorMessage = "Obrigatorio informar o telefone!")]
 
-        public int Telefone { get; set; }
+        public string Telefone { get; set; }
     }
 }
