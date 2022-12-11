@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Back_ps.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Back_ps.Controllers
 {
@@ -16,6 +18,53 @@ namespace Back_ps.Controllers
         public CadastroUsuariosController(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login([Bind("Email,Senha")] CadastroUsuario cadastroUsuario)
+        {
+            var userin = await _context.CadastroUsuarios
+                .FirstOrDefaultAsync(m => m.Email == cadastroUsuario.Email);
+
+            if (userin == null)
+            {
+                ViewBag.Message = "Usuário ou Senha Inválido!";
+                return View();
+            }
+
+            bool isSenhaok = BCrypt.Net.BCrypt.Verify(cadastroUsuario.Senha, userin.Senha);
+
+            if(isSenhaok)
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, userin.Nome),
+                    new Claim(ClaimTypes.NameIdentifier, userin.Nome)
+                };
+
+                var userIdentity = new ClaimsIdentity(claims, "login");
+
+                ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity); 
+
+                var props = new AuthenticationProperties
+                {
+                    AllowRefresh = true
+                };
+
+                await HttpContext.SignInAsync(principal, props);
+
+                return Redirect("/");
+
+                ViewBag.Message = "Usuário OK!";
+                return View();
+            }
+            ViewBag.Message = "Usuário ou Senha Inválido!";
+            return View();
         }
 
         // GET: CadastroUsuarios

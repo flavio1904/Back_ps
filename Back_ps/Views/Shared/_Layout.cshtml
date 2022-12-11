@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using SignInManager<IdentityUser> SignInManager
+@using UserManager<IdentityUser> UserManager 
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,6 +29,20 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="CadastroUsuarios" asp-action="Index">Usuarios</a>
                         </li>
+                    </ul>
+                    <ul class="navbar-nav">
+
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="navbar-item">
+                                Olá, @User.Identity.Name
+                            </li>
+
+                        }
+                        <li class="navbar-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="CadastroUsuarios" asp-action="Login">Login</a>
+                        </li>
+
                     </ul>
                 </div>
             </div>
