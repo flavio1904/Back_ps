@@ -12,6 +12,8 @@ namespace Back_ps.Models
         {
         }
         public DbSet<CadastroUsuario> CadastroUsuarios { get; set; }
+
+        public DbSet<Usuario> User { get; set; }
     }
      
 }

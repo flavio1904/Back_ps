@@ -9,22 +9,22 @@ using Back_ps.Models;
 
 namespace Back_ps.Controllers
 {
-    public class CadastroUsuariosController : Controller
+    public class UsuariosController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CadastroUsuariosController(ApplicationDbContext context)
+        public UsuariosController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: CadastroUsuarios
+        // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CadastroUsuarios.ToListAsync());
+            return View(await _context.User.ToListAsync());
         }
 
-        // GET: CadastroUsuarios/Details/5
+        // GET: Usuarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,40 +32,39 @@ namespace Back_ps.Controllers
                 return NotFound();
             }
 
-            var cadastroUsuario = await _context.CadastroUsuarios
+            var usuario = await _context.User
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (cadastroUsuario == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(cadastroUsuario);
+            return View(usuario);
         }
 
-        // GET: CadastroUsuarios/Create
+        // GET: Usuarios/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: CadastroUsuarios/Create
+        // POST: Usuarios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,Genero,Idade,Telefone")] CadastroUsuario cadastroUsuario)
+        public async Task<IActionResult> Create([Bind("Id,Email,Senha")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                cadastroUsuario.Senha = BCrypt.Net.BCrypt.HashPassword(cadastroUsuario.Senha);
-                _context.Add(cadastroUsuario);
+                _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cadastroUsuario);
+            return View(usuario);
         }
 
-        // GET: CadastroUsuarios/Edit/5
+        // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +72,22 @@ namespace Back_ps.Controllers
                 return NotFound();
             }
 
-            var cadastroUsuario = await _context.CadastroUsuarios.FindAsync(id);
-            if (cadastroUsuario == null)
+            var usuario = await _context.User.FindAsync(id);
+            if (usuario == null)
             {
                 return NotFound();
             }
-            return View(cadastroUsuario);
+            return View(usuario);
         }
 
-        // POST: CadastroUsuarios/Edit/5
+        // POST: Usuarios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Senha,Genero,Idade,Telefone")] CadastroUsuario cadastroUsuario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,Senha")] Usuario usuario)
         {
-            if (id != cadastroUsuario.Id)
+            if (id != usuario.Id)
             {
                 return NotFound();
             }
@@ -97,13 +96,12 @@ namespace Back_ps.Controllers
             {
                 try
                 {
-                    cadastroUsuario.Senha = BCrypt.Net.BCrypt.HashPassword(cadastroUsuario.Senha);
-                    _context.Update(cadastroUsuario);
+                    _context.Update(usuario);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CadastroUsuarioExists(cadastroUsuario.Id))
+                    if (!UsuarioExists(usuario.Id))
                     {
                         return NotFound();
                     }
@@ -114,10 +112,10 @@ namespace Back_ps.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cadastroUsuario);
+            return View(usuario);
         }
 
-        // GET: CadastroUsuarios/Delete/5
+        // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,30 +123,30 @@ namespace Back_ps.Controllers
                 return NotFound();
             }
 
-            var cadastroUsuario = await _context.CadastroUsuarios
+            var usuario = await _context.User
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (cadastroUsuario == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(cadastroUsuario);
+            return View(usuario);
         }
 
-        // POST: CadastroUsuarios/Delete/5
+        // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cadastroUsuario = await _context.CadastroUsuarios.FindAsync(id);
-            _context.CadastroUsuarios.Remove(cadastroUsuario);
+            var usuario = await _context.User.FindAsync(id);
+            _context.User.Remove(usuario);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CadastroUsuarioExists(int id)
+        private bool UsuarioExists(int id)
         {
-            return _context.CadastroUsuarios.Any(e => e.Id == id);
+            return _context.User.Any(e => e.Id == id);
         }
     }
 }

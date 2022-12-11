@@ -18,6 +18,7 @@ namespace Back_ps.Models
         [Required(ErrorMessage = "Obrigatorio informar o Email!")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Obrigatorio informar a Senha!")]
+        [DataType(DataType.Password)]
         public string Senha { get; set; }
         [Required(ErrorMessage = "Obrigatorio informar o Genero!")]
         public string Genero { get; set; }
