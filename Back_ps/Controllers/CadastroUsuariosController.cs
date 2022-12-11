@@ -67,6 +67,12 @@ namespace Back_ps.Controllers
             return View();
         }
 
+        public IActionResult AccessDenied()
+        {
+            return View();
+
+        }
+
         // GET: CadastroUsuarios
         public async Task<IActionResult> Index()
         {
