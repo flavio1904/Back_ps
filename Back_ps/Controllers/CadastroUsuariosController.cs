@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Back_ps.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Back_ps.Controllers
 {
+    [Authorize]
     public class CadastroUsuariosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -19,13 +21,14 @@ namespace Back_ps.Controllers
         {
             _context = context;
         }
-
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([Bind("Email,Senha")] CadastroUsuario cadastroUsuario)
         {
             var userin = await _context.CadastroUsuarios
@@ -66,7 +69,7 @@ namespace Back_ps.Controllers
             ViewBag.Message = "Usuário ou Senha Inválido!";
             return View();
         }
-
+        [AllowAnonymous]
         public IActionResult AccessDenied()
         {
             return View();
