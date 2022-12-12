@@ -63,8 +63,8 @@ namespace Back_ps.Controllers
 
                 return Redirect("/");
 
-                ViewBag.Message = "Usuário OK!";
-                return View();
+                
+
             }
             ViewBag.Message = "Usuário ou Senha Inválido!";
             return View();
@@ -113,6 +113,7 @@ namespace Back_ps.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,Genero,Idade,Telefone")] CadastroUsuario cadastroUsuario)
         {
             if (ModelState.IsValid)
@@ -120,7 +121,8 @@ namespace Back_ps.Controllers
                 cadastroUsuario.Senha = BCrypt.Net.BCrypt.HashPassword(cadastroUsuario.Senha);
                 _context.Add(cadastroUsuario);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                
+                return Redirect("/");
             }
             return View(cadastroUsuario);
         }
