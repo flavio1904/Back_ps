@@ -1,4 +1,6 @@
 ﻿using Back_ps.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -23,6 +25,16 @@ namespace Back_ps.Controllers
             return View();
         }
 
+        public IActionResult Sobre()
+        {
+            return View();
+        }
+
+        public IActionResult FaleConosco()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -32,6 +44,13 @@ namespace Back_ps.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("index", "home");
         }
     }
 }

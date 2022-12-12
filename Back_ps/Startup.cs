@@ -68,6 +68,7 @@ namespace Back_ps
 
             app.UseCookiePolicy();
 
+
             app.UseAuthentication();
 
             app.UseAuthorization();

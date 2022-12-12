@@ -77,6 +77,7 @@ namespace Back_ps.Controllers
         }
 
         // GET: CadastroUsuarios
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.CadastroUsuarios.ToListAsync());
@@ -101,6 +102,7 @@ namespace Back_ps.Controllers
         }
 
         // GET: CadastroUsuarios/Create
+        [AllowAnonymous]
         public IActionResult Create()
         {
             return View();
