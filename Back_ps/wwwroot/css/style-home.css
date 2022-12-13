@@ -91,6 +91,69 @@ form [type="submit"]:hover{
     background: #1e5869;
     transition: 1s ease    
     }
+/*STYLE para a página Login*/
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    margin-top: 125px;
+    margin-bottom: 125px;
+}
+.col-md-4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    width: 308px;
+    height: 390px;
+    padding: 65px;
+    border-radius: 6px;
+}
+
+.form-group input {
+    margin-top: 15px;
+    font-size: 14px;
+    border: 2px solid #f0f0f0;
+    border: none;
+    height: 30px;
+    outline: none;
+    border-radius: 10px;
+    color: black;
+    padding-left: 10px;
+}
+
+/*STYLE para a página Sobre*/
+
+.sobreTitulo h1{
+    font-size: 3rem !important;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
+.sobreTexto{
+    font-size:2.2rem;
+    padding: 10px;
+}
+
+/*STYLE para a página Cadastro*/
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    border-radius: 6px;
+    box-shadow: 5px 5px 10px black;
+    width: 460px;
+    max-width: 100%;
+    margin-top: 125px;
+    margin-bottom: 125px;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 footer {
     background-color: #4299b3;
