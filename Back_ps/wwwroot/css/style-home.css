@@ -59,9 +59,7 @@ body {
     margin-bottom: 20px;
     font-size: 5.0rem !important;
 }
-.titulo_pagina {
-    font-size: 5.0rem;
-}
+
 
 
 
@@ -125,17 +123,17 @@ form [type="submit"]:hover{
 
 /*STYLE para a página Sobre*/
 
-.sobreTitulo h1{
-    font-size: 3rem !important;
+.titulo_pagina {
+    font-size: 2.2rem;
+    line-height:45px;
+}
+.titulo_pagina h1 {
     font-weight: bold;
     margin-top: 50px;
     margin-bottom: 10px;
+    font-size: 3.5rem !important;
 }
 
-.sobreTexto{
-    font-size:2.2rem;
-    padding: 10px;
-}
 
 /*STYLE para a página Cadastro*/
 .container {
@@ -153,7 +151,22 @@ form [type="submit"]:hover{
     margin-left: auto;
     margin-right: auto;
 }
+/*STYLE para a página Fale Conosco*/
 
+.faleConoscoTitulo {
+    text-align: center;
+    padding: 50px;
+    margin-bottom: 20px;
+    font-size: 5.0rem !important;
+}
+
+.faleConoscoTexto {
+    font-size:45px !important;
+}
+
+.faleConoscoLista {
+    font-size: 30px !important;
+}
 
 footer {
     background-color: #4299b3;
